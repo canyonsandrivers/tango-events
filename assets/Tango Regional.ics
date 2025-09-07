@@ -3,7 +3,7 @@ CALSCALE:GREGORIAN
 PRODID:-//Apple Inc.//macOS 15.6.1//EN
 VERSION:2.0
 X-APPLE-CALENDAR-COLOR:#FFCC00
-X-WR-CALNAME:Tango Regional
+X-WR-CALNAME:Tango_Regional
 BEGIN:VTIMEZONE
 TZID:America/Denver
 BEGIN:DAYLIGHT
@@ -49,7 +49,7 @@ DESCRIPTION:Now\, for the first time\, David Alejandro Palo brings his s
  s details and registration\, please contact Masako\n\n\nhttps://www.face
  book.com/events/677428562022013/
 DTEND;TZID=America/Denver:20250921T190000
-DTSTAMP:20250906T182500Z
+DTSTAMP:20250907T155604Z
 DTSTART;TZID=America/Denver:20250920T140000
 LAST-MODIFIED:20250906T142241Z
 LOCATION:Dance Station-Santa Fe\, NM
@@ -81,7 +81,7 @@ DESCRIPTION:Come dance with us\, with simple\, slow\, groovy steps!\n\n6
  tation\, 947 B West Alameda\, Santa Fe\, NM\n\nhttps://www.facebook.com/
  events/2788247888040637/
 DTEND;TZID=America/Denver:20250927T220000
-DTSTAMP:20250906T182500Z
+DTSTAMP:20250907T155604Z
 DTSTART;TZID=America/Denver:20250927T190000
 LAST-MODIFIED:20250906T142658Z
 LOCATION:947B West Alameda\, Santa Fe\, NM\, United States\, New Mexico
@@ -121,7 +121,7 @@ DESCRIPTION:September 5\, 6 & 7\, two of the best tango teachers are com
  gle Milonga: $ 15 \nText Pablo to RSVP at (801) 404-4096\n\nhttps://www.
  facebook.com/events/2603974489949290/
 DTEND;TZID=America/Denver:20250907T154500
-DTSTAMP:20250906T182500Z
+DTSTAMP:20250907T155604Z
 DTSTART;TZID=America/Denver:20250905T190000
 LAST-MODIFIED:20250906T163442Z
 LOCATION:35 W Alta View Way\, Sandy\, UT 84070-3231\, United States
@@ -143,9 +143,10 @@ END:VEVENT
 BEGIN:VEVENT
 CREATED:20250906T171007Z
 DTEND;TZID=America/Denver:20251102T235900
-DTSTAMP:20250906T182500Z
+DTSTAMP:20250907T155604Z
 DTSTART;TZID=America/Denver:20251030T173000
-LAST-MODIFIED:20250906T175035Z
+LAST-MODIFIED:20250906T184536Z
+LOCATION:Albuquerque\, NM
 SEQUENCE:1
 SUMMARY:Albuquerque Tango Festival
 TRANSP:OPAQUE
@@ -155,5 +156,35 @@ URL;VALUE=URI:https://albuquerquetangofestival.com/?fbclid=IwY2xjawMpSZl
  bNRGj6bL2OPFNn4p0WOypPbD88r7GsHlkpQ_aem_R8BXg2uJtzRxDPfoWI2exQ
 X-APPLE-CREATOR-IDENTITY:com.apple.calendar
 X-APPLE-CREATOR-TEAM-IDENTITY:0000000000
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20250907T045220Z
+DESCRIPTION:Join us for our sixth gazebo milonga of the year with DJ Kip
+ p Chynoweth!\n\nTCA Old Town Gazebo Milonga\, Tango por la Tarde\n200 N.
+  Plaza St. NW 87104\nSunday\, June 22\n\nFree and open to the public. Do
+ nations are greatly appreciated. \n\n--IMPORTANT--  Bring your own chair
+ (s) and water bottle. Unfortunately the city can no longer provide chair
+ s so if you want a place to sit you have to bring your own! Parking avai
+ lable around or near the Plaza. \n\n
+DTEND;TZID=America/Denver:20250914T213000
+DTSTAMP:20250907T155604Z
+DTSTART;TZID=America/Denver:20250914T190000
+LAST-MODIFIED:20250907T045220Z
+LOCATION:Old Town Gazebo\, Albuquerque
+SEQUENCE:0
+SUMMARY:Tango por la Tarde #7 (2025) with DJ Kipp Chynoweth!
+TRANSP:OPAQUE
+UID:83FBF971-16C1-4937-B6AF-DC4AF9F65690
+URL;VALUE=URI:https://facebook.com/events/s/tango-por-la-tarde-7-2025-wi
+ th/801510055787350/
+X-APPLE-CREATOR-IDENTITY:com.facebook.Facebook
+X-APPLE-CREATOR-TEAM-IDENTITY:V9WTTPBFK9
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+TRIGGER:-PT3H
+UID:3A3B775B-B81A-4046-B036-1A41626979EA
+X-WR-ALARMUID:3A3B775B-B81A-4046-B036-1A41626979EA
+END:VALARM
 END:VEVENT
 END:VCALENDAR

@@ -1,7 +1,1 @@
-{
-  "name": "tango-events",
-  "private": true,
-  "scripts": {
-    "build": "node tools/combine_ics.js"
-  }
-}
+{ "name": "tango-events", "private": true }
