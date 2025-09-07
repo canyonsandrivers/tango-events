@@ -1,4 +1,3 @@
-cat > package.json <<'JSON'
 {
   "name": "tango-events",
   "private": true,
@@ -6,5 +5,3 @@ cat > package.json <<'JSON'
     "build": "node tools/combine_ics.js"
   }
 }
-JSON
-
