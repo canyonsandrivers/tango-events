@@ -19,16 +19,20 @@
   <meta name="twitter:description" content="Find upcoming Argentine Tango events in and around Durango, Colorado — practicas, milongas, workshops, and festivals updated regularly.">
   <meta name="twitter:image" content="https://durangotango.info/assets/tango-preview.jpg">
 
-  <!-- FullCalendar (core + required view plugins + iCalendar) -->
+  <!-- FullCalendar core + required plugins (order matters) -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
+  <!-- ical.js parser (required by the iCalendar plugin) -->
+  <script src="https://cdn.jsdelivr.net/npm/ical.js@1.4.0/build/ical.min.js"></script>
+
+  <!-- Views + iCalendar plugin -->
   <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.11/index.global.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.11/index.global.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@6.1.11/index.global.min.js"></script>
 
   <style>
-    :root{ --bg:#0b1020; --fg:#e5e7eb; --border:#1f2937; --accent:#38bdf8;
-           --local:#10b981; --regional:#fb923c; }
+    :root{ --bg:#0b1020; --fg:#e5e7eb; --border:#1f2937; --accent:#38bdf8; --local:#10b981; --regional:#fb923c; }
     *{ box-sizing:border-box; }
     html,body{ margin:0; padding:0; height:100%; background:var(--bg); color:var(--fg);
                font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial; }
@@ -44,8 +48,6 @@
     .dot{ width:10px; height:10px; border-radius:999px; display:inline-block; margin-right:6px; }
     .dot.local{ background:var(--local); } .dot.regional{ background:var(--regional); }
     footer{ margin-top:14px; color:#cbd5e1; }
-
-    /* Calendar theming */
     .fc{ background:#0f172a; border:1px solid var(--border); border-radius:14px; padding:10px; }
     .fc a{ color:#dbeafe } .fc .fc-button{ background:#111827; border-color:#243244; }
     .fc .fc-button-primary:not(:disabled).fc-button-active,
@@ -60,7 +62,6 @@
     </header>
 
     <div class="toolbar">
-      <!-- View toggles -->
       <button class="pill view active" data-view="dayGridMonth">Month</button>
       <button class="pill view" data-view="listMonth">Agenda</button>
 
@@ -70,7 +71,6 @@
       </div>
 
       <div style="width:100%"></div>
-      <!-- Filters -->
       <div class="filters">
         <button class="pill active" data-filter="all">All</button>
         <button class="pill" data-filter="local">Local</button>
@@ -89,7 +89,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       const calEl = document.getElementById('calendar');
 
-      // Build source configs once so we can remove/re-add cleanly for filters
+      // Build source configs so we can re-add/remove for filters
       const css = getComputedStyle(document.documentElement);
       const sourceDefs = {
         local: {
@@ -115,7 +115,7 @@
         headerToolbar: false,
         eventTimeFormat: { hour: 'numeric', minute: '2-digit' },
 
-        // IMPORTANT: register required plugins
+        // Register required plugins (names come from the global builds we loaded)
         plugins: [ FullCalendarDayGrid, FullCalendarList, FullCalendarICalendar ],
 
         eventSources: [ sourceDefs.local, sourceDefs.regional ],
@@ -138,38 +138,23 @@
         });
       });
 
-      // Filters (remove/add sources)
-      const ensureSource = (id) => {
-        if (!calendar.getEventSourceById(id)) {
-          calendar.addEventSource(sourceDefs[id]);
-        }
-      };
-      const removeSource = (id) => {
-        const s = calendar.getEventSourceById(id);
-        if (s) s.remove();
-      };
-
+      // Filters: remove/add eventSources
+      const ensureSource = (id) => { if (!calendar.getEventSourceById(id)) calendar.addEventSource(sourceDefs[id]); };
+      const removeSource = (id) => { const s = calendar.getEventSourceById(id); if (s) s.remove(); };
       const setFilter = (which) => {
         document.querySelectorAll('.filters .pill').forEach(p => p.classList.remove('active'));
         document.querySelector(`.filters .pill[data-filter="${which}"]`).classList.add('active');
-
         if (which === 'all') { ensureSource('local'); ensureSource('regional'); }
         else if (which === 'local') { ensureSource('local'); removeSource('regional'); }
-        else if (which === 'regional') { ensureSource('regional'); removeSource('local'); }
+        else { ensureSource('regional'); removeSource('local'); }
       };
+      document.querySelectorAll('.filters .pill').forEach(p => p.addEventListener('click', () => setFilter(p.dataset.filter)));
 
-      document.querySelectorAll('.filters .pill').forEach(p => {
-        p.addEventListener('click', () => setFilter(p.dataset.filter));
-      });
-
-      // Subscribe button (open both ICS with webcal when on https)
-      const makeWebcal = (path) => (location.protocol === 'https:'
-        ? 'webcal://' + location.host + path
-        : path);
-
+      // Subscribe button (opens both feeds; uses webcal:// on https)
+      const toWebcal = (path) => (location.protocol === 'https:' ? 'webcal://' + location.host + path : path);
       document.getElementById('subAll').addEventListener('click', () => {
-        window.open(makeWebcal('/assets/Tango%20Local.ics'), '_blank');
-        setTimeout(() => window.open(makeWebcal('/assets/Tango%20Regional.ics'), '_blank'), 350);
+        window.open(toWebcal('/assets/Tango%20Local.ics'), '_blank');
+        setTimeout(() => window.open(toWebcal('/assets/Tango%20Regional.ics'), '_blank'), 350);
       });
     });
   </script>
