@@ -1,0 +1,159 @@
+BEGIN:VCALENDAR
+CALSCALE:GREGORIAN
+PRODID:-//Apple Inc.//macOS 15.6.1//EN
+VERSION:2.0
+X-APPLE-CALENDAR-COLOR:#FFCC00
+X-WR-CALNAME:Tango Regional
+BEGIN:VTIMEZONE
+TZID:America/Denver
+BEGIN:DAYLIGHT
+DTSTART:20070311T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+TZNAME:MDT
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0600
+END:DAYLIGHT
+BEGIN:STANDARD
+DTSTART:20071104T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+TZNAME:MST
+TZOFFSETFROM:-0600
+TZOFFSETTO:-0700
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+CREATED:20250818T104137Z
+DESCRIPTION:Now\, for the first time\, David Alejandro Palo brings his s
+ ignature seminar  Sy ° Sy ° Sy to Santa Fe! Sy ° Sy ° Sy is ideal for da
+ ncers who want to refine their connection\, elevate their communication\
+ , and rediscover the magic of dancing with another human being. \n\n🔸 S
+ ynchronization Sat. Sept. 20th\, 2-3:30pm\nWe explore timing — not just 
+ with the music\, but within the couple. How do we step together\, lead i
+ n time\, and respond in time? Through exercises that emphasize musical p
+ hrasing and internal timing\, we’ll develop a sense of shared rhythm.\nE
+ verything—sacadas\, giros\, boleos—only works when we move together\, no
+ t just at the same time\, but with the same intention.\n\n🔸 Symmetry  S
+ at. Sept. 20th\, 4-5:30pm\nSymmetry invites awareness of the shared spac
+ e inside the embrace. We study body alignment\, axis\, and micro-adjustm
+ ents to generate fluid movement within the couple\, not away from it.\nU
+ nderstand where to step\, how to generate space\, and how to maintain co
+ nnection\, clarity\, and energy—all applied in sequences for social danc
+ ing.\n\n🔸 Synthony Sun. Sept. 21st\, 5:30-7pm\nThat elusive “click” wit
+ h a partner? Synthony is how we approach it. This class works on intuiti
+ ve listening\, shared interpretation\, and how to be “in tune” through i
+ ntention\, presence\, and subtle pressure.\nWe explore the creative role
+ s of both leader and follower—proposing\, receiving\, and co-creating.\n
+ \n\nThis seminar is especially designed for dancers who want to go beyon
+ d steps and dive into the invisible architecture of tango connection. Cl
+ asses can be taken as a full series or adapted individually.\n\nFor clas
+ s details and registration\, please contact Masako\n\n\nhttps://www.face
+ book.com/events/677428562022013/
+DTEND;TZID=America/Denver:20250921T190000
+DTSTAMP:20250906T182500Z
+DTSTART;TZID=America/Denver:20250920T140000
+LAST-MODIFIED:20250906T142241Z
+LOCATION:Dance Station-Santa Fe\, NM
+SEQUENCE:0
+SUMMARY:Sy ° Sy ° Sy – Tango in Three Dimensions by David Alejandro Palo
+TRANSP:OPAQUE
+UID:F8915B79-5C26-4F7E-9304-2897B3C4F335
+URL;VALUE=URI:https://www.facebook.com/events/677428562022013/
+X-APPLE-CREATOR-IDENTITY:com.apple.mail
+X-APPLE-CREATOR-TEAM-IDENTITY:0000000000
+X-APPLE-SUGGESTION-INFO-CHANGED-FIELDS:0
+X-APPLE-SUGGESTION-INFO-CHANGES-ACKNOWLEDGED:FALSE
+X-APPLE-SUGGESTION-INFO-OPAQUE-KEY:|e677428562022013@facebook.com
+X-APPLE-SUGGESTION-INFO-TIMESTAMP:20560818T104137Z
+X-APPLE-SUGGESTION-INFO-UNIQUE-KEY:|2|\\|e677428562022013@facebook.com|\
+ \|5\\|\\\\\\|F2C2E939-3F24-42AF-92FD-4F326FDEF6A3\\\\\\|<99b477fd-6227-4
+ 5a9-bb5a-560eee2515db@facebookmail.com>
+BEGIN:VALARM
+ACTION:NONE
+TRIGGER;VALUE=DATE-TIME:19760401T005545Z
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20250822T001313Z
+DESCRIPTION:Come dance with us\, with simple\, slow\, groovy steps!\n\n6
+ :45 Doors Open\n7:00 PM Basic Lesson with Mike & Elli\n8:00-10:00 PM Dan
+ ce with DJ Mike\n$10-$20 Sliding Scale\, No partner needed\n\nLight refr
+ eshments provided\, feel free to bring something to share!\n\nAt Dance S
+ tation\, 947 B West Alameda\, Santa Fe\, NM\n\nhttps://www.facebook.com/
+ events/2788247888040637/
+DTEND;TZID=America/Denver:20250927T220000
+DTSTAMP:20250906T182500Z
+DTSTART;TZID=America/Denver:20250927T190000
+LAST-MODIFIED:20250906T142658Z
+LOCATION:947B West Alameda\, Santa Fe\, NM\, United States\, New Mexico
+SEQUENCE:0
+SUMMARY:Blues Swing Tango Fusion Party with Mike & Elli
+TRANSP:OPAQUE
+UID:1357EB00-4CF2-4BF4-9656-D75CB2FBB6AE
+URL;VALUE=URI:https://www.facebook.com/events/2788247888040637/
+X-APPLE-CREATOR-IDENTITY:com.apple.mail
+X-APPLE-CREATOR-TEAM-IDENTITY:0000000000
+X-APPLE-SUGGESTION-INFO-CHANGED-FIELDS:0
+X-APPLE-SUGGESTION-INFO-CHANGES-ACKNOWLEDGED:FALSE
+X-APPLE-SUGGESTION-INFO-OPAQUE-KEY:|e2788247888040637@facebook.com
+X-APPLE-SUGGESTION-INFO-TIMESTAMP:20560822T001313Z
+X-APPLE-SUGGESTION-INFO-UNIQUE-KEY:|2|\\|e2788247888040637@facebook.com|
+ \\|5\\|\\\\\\|F2C2E939-3F24-42AF-92FD-4F326FDEF6A3\\\\\\|<2569ecc9-4746-
+ 48f9-bf3b-69b12e47f784@facebookmail.com>
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20250831T021019Z
+DESCRIPTION:September 5\, 6 & 7\, two of the best tango teachers are com
+ ing to Utah. They are both from Argentina — David Caputo and Lucía Petko
+ vic.\n\nThey will be giving a workshop in Sandy\, Utah\, with the follow
+ ing program:\n\nFriday\, September 5th\n\n7:00 PM – 8:15 PM Class 1: Emb
+ race and Movement\nWe’ll explore how embrace and music influence the cou
+ ple’s movement and connection.\n\nMilonga Friday  (8:30 – 11:45 PM)\nDJ:
+  Lucía\n\nSaturday\, September 6th\n\n1:00 PM – 2:15 PM Class 2: Tango\,
+  Giros\nGiros in milonguero and salón styles\, with both follower and le
+ ader embellishments.\n\n2:30 PM – 3:45 PM Class 3: Vals\, Vaivén\nUseful
+  techniques and rhythm for more connected and fluid dancing in vals.\n\n
+ Milonga Saturday (8:00 – 11:45 PM)\nDJ: Lucía\n\nSunday\, September 7th\
+ n1:00 PM – 2:15 PM Class 4: Tango\, Salida del ‘40\nFocus on highs and l
+ ows and different alternatives for the Salida del ‘40.\n\n2:30 PM – 3:45
+  PM Class 5: Milonga\, Traspié\nThis class will guide participants to de
+ velop their own unique traspiés\, starting from a simple foundation.\n\n
+ Full package (5 classes + 2 milongas): $100\nSingle class: $20 each\nSin
+ gle Milonga: $ 15 \nText Pablo to RSVP at (801) 404-4096\n\nhttps://www.
+ facebook.com/events/2603974489949290/
+DTEND;TZID=America/Denver:20250907T154500
+DTSTAMP:20250906T182500Z
+DTSTART;TZID=America/Denver:20250905T190000
+LAST-MODIFIED:20250906T163442Z
+LOCATION:35 W Alta View Way\, Sandy\, UT 84070-3231\, United States
+SEQUENCE:0
+SUMMARY:ARGENTINE TANGO WORKSHOP with David & Lucía
+TRANSP:OPAQUE
+UID:48124B1F-1FBB-43AB-A3EC-FED673EEF362
+URL;VALUE=URI:https://www.facebook.com/events/2603974489949290/
+X-APPLE-CREATOR-IDENTITY:com.apple.mail
+X-APPLE-CREATOR-TEAM-IDENTITY:0000000000
+X-APPLE-SUGGESTION-INFO-CHANGED-FIELDS:0
+X-APPLE-SUGGESTION-INFO-CHANGES-ACKNOWLEDGED:FALSE
+X-APPLE-SUGGESTION-INFO-OPAQUE-KEY:|e2603974489949290@facebook.com
+X-APPLE-SUGGESTION-INFO-TIMESTAMP:20560831T021019Z
+X-APPLE-SUGGESTION-INFO-UNIQUE-KEY:|2|\\|e2603974489949290@facebook.com|
+ \\|5\\|\\\\\\|F2C2E939-3F24-42AF-92FD-4F326FDEF6A3\\\\\\|<b9814a9b-8c17-
+ 4ac6-bbab-abb960e1fe68@facebookmail.com>
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20250906T171007Z
+DTEND;TZID=America/Denver:20251102T235900
+DTSTAMP:20250906T182500Z
+DTSTART;TZID=America/Denver:20251030T173000
+LAST-MODIFIED:20250906T175035Z
+SEQUENCE:1
+SUMMARY:Albuquerque Tango Festival
+TRANSP:OPAQUE
+UID:F0E4C315-4112-446B-9A87-EB3942DA5230
+URL;VALUE=URI:https://albuquerquetangofestival.com/?fbclid=IwY2xjawMpSZl
+ leHRuA2FlbQIxMABicmlkETFSY3lkeVk4U1FJM1BwZWp3AR64gGnNnbNpccSVtY-BWyqQpT3
+ bNRGj6bL2OPFNn4p0WOypPbD88r7GsHlkpQ_aem_R8BXg2uJtzRxDPfoWI2exQ
+X-APPLE-CREATOR-IDENTITY:com.apple.calendar
+X-APPLE-CREATOR-TEAM-IDENTITY:0000000000
+END:VEVENT
+END:VCALENDAR
