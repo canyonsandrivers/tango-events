@@ -1,8 +1,8 @@
 [build]
-  command = "npm run build"
+  command = ""   # no build step
   publish = "."
 
-# Redirect all www → apex (durangotango.info)
+# Redirect all www → apex
 [[redirects]]
   from = "https://www.durangotango.info/*"
   to = "https://durangotango.info/:splat"
