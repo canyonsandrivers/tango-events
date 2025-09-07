@@ -1,15 +1,11 @@
 [build]
+  command = "npm run build"
   publish = "."
-  command = ""
 
+# Redirect all www → apex (durangotango.info)
 [[redirects]]
   from = "https://www.durangotango.info/*"
-  to   = "https://durangotango.info/:splat"
+  to = "https://durangotango.info/:splat"
   status = 301
   force = true
 
-[[headers]]
-  for = "/*"
-  [headers.values]
-  X-Content-Type-Options = "nosniff"
-  Referrer-Policy = "strict-origin-when-cross-origin"
