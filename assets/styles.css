@@ -1,0 +1,18 @@
+:root{--bg:#0b1220;--fg:#e7eefc;--muted:#97a3b6;--accent:#4cc38a;--accent2:#fcbf49;--card:#121b2f;--line:#1f2a44}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,Arial,sans-serif}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid var(--line)}
+.title{font-weight:bold;font-size:20px}
+.controls{display:flex;gap:8px;flex-wrap:wrap}
+.btn{padding:6px 12px;border:1px solid var(--line);border-radius:6px;background:transparent;color:var(--fg);cursor:pointer}
+.btn.active{background:var(--fg);color:var(--bg)}
+.month{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.day-header{text-align:center;font-size:12px;color:var(--muted)}
+.cell{border:1px solid var(--line);min-height:80px;padding:4px;background:var(--card);position:relative}
+.cell .dnum{position:absolute;top:4px;right:6px;font-size:11px;color:var(--muted)}
+.ev{margin-top:16px;font-size:12px;border-top:1px solid var(--line);padding-top:2px}
+.legend{margin:8px;font-size:13px;color:var(--muted);display:flex;gap:12px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.dot.local{background:var(--accent)}.dot.regional{background:var(--accent2)}
+.list{display:flex;flex-direction:column;gap:8px}
+.item{border:1px solid var(--line);padding:8px;border-radius:6px;background:var(--card)}
+footer{margin:16px;font-size:12px;color:var(--muted)}

@@ -1,11 +1,9 @@
 [build]
-  command = ""   # no build step
+  command = ""
   publish = "."
 
-# Redirect all www → apex
 [[redirects]]
-  from = "https://www.durangotango.info/*"
-  to = "https://durangotango.info/:splat"
+  from = "https://durangotango.info/*"
+  to = "https://www.durangotango.info/:splat"
   status = 301
   force = true
-

@@ -1,163 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>2Tango Events Around Durango — Durango Tango</title>
-  <link rel="canonical" href="https://durangotango.info/">
-
-  <!-- SEO -->
-  <meta name="description" content="Find upcoming Argentine Tango events in and around Durango, Colorado — practicas, milongas, workshops, and festivals updated regularly.">
-  <meta name="robots" content="index, follow">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://durangotango.info/">
-  <meta property="og:title" content="Tango Events Around Durango — Durango Tango">
-  <meta property="og:description" content="Find upcoming Argentine Tango events in and around Durango, Colorado — practicas, milongas, workshops, and festivals updated regularly.">
-  <meta property="og:image" content="https://durangotango.info/assets/tango-preview.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tango Events Around Durango — Durango Tango">
-  <meta name="twitter:description" content="Find upcoming Argentine Tango events in and around Durango, Colorado — practicas, milongas, workshops, and festivals updated regularly.">
-  <meta name="twitter:image" content="https://durangotango.info/assets/tango-preview.jpg">
-
-  <!-- FullCalendar core -->
-  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
-
-  <!-- REQUIRED for ICS: the ical.js parser must be loaded before the iCalendar plugin -->
-  <script src="https://cdn.jsdelivr.net/npm/ical.js@1.4.0/build/ical.min.js"></script>
-
-  <!-- Views + iCalendar plugin (order after core) -->
-  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.11/index.global.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.11/index.global.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@6.1.11/index.global.min.js"></script>
-
-  <style>
-    :root{ --bg:#0b1020; --fg:#e5e7eb; --border:#1f2937; --accent:#38bdf8; --local:#10b981; --regional:#fb923c; }
-    *{ box-sizing:border-box; }
-    html,body{ margin:0; padding:0; height:100%; background:var(--bg); color:var(--fg);
-               font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial; }
-    .wrap{ max-width:1100px; margin:0 auto; padding:clamp(12px,2vw,24px); }
-    header{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-    .title{ font-weight:800; letter-spacing:.2px; font-size:clamp(1.25rem,1rem + 1.2vw,1.8rem); margin-right:auto; }
-    .btn{ background:#111827;border:1px solid var(--border);color:var(--fg);padding:8px 12px;border-radius:10px;cursor:pointer }
-    .btn.primary{ border-color:var(--accent) }
-    .toolbar{ display:flex; gap:10px; align-items:center; margin-top:12px; flex-wrap:wrap; }
-    .pill{ border:1px solid var(--border); background:#101827; color:#d1d5db; padding:6px 10px; border-radius:999px; cursor:pointer; }
-    .pill.active{ border-color:var(--accent); color:#fff }
-    .legend{ margin-left:auto; display:flex; gap:16px; align-items:center; font-size:.9rem; }
-    .dot{ width:10px; height:10px; border-radius:999px; display:inline-block; margin-right:6px; }
-    .dot.local{ background:var(--local); } .dot.regional{ background:var(--regional); }
-    footer{ margin-top:14px; color:#cbd5e1; }
-    .fc{ background:#0f172a; border:1px solid var(--border); border-radius:14px; padding:10px; }
-    .fc a{ color:#dbeafe } .fc .fc-button{ background:#111827; border-color:#243244; }
-    .fc .fc-button-primary:not(:disabled).fc-button-active,
-    .fc .fc-button-primary:focus{ background:#162034; border-color:#264266; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tango Events Around Durango — Durangotango.info</title>
+<link rel="stylesheet" href="./assets/styles.css">
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="title">Tango Events Around Durango</div>
-      <button class="btn primary" id="subAll">📥 Subscribe (both .ics)</button>
-    </header>
-
-    <div class="toolbar">
-      <button class="pill view active" data-view="dayGridMonth">Month</button>
-      <button class="pill view" data-view="listMonth">Agenda</button>
-
-      <div class="legend">
-        <span><span class="dot local"></span>Local</span>
-        <span><span class="dot regional"></span>Regional</span>
-      </div>
-
-      <div style="width:100%"></div>
-      <div class="filters">
-        <button class="pill active" data-filter="all">All</button>
-        <button class="pill" data-filter="local">Local</button>
-        <button class="pill" data-filter="regional">Regional</button>
-      </div>
-    </div>
-
-    <div id="calendar"></div>
-
-    <footer>
-      Find upcoming Argentine Tango events in and around Durango, Colorado — practicas, milongas, workshops, and festivals updated regularly.
-    </footer>
+<header>
+  <div class="title">Tango Events Around Durango</div>
+  <div class="controls">
+    <a class="btn" href="./assets/Tango%20Local.ics" download>Subscribe Local</a>
+    <a class="btn" href="./assets/Tango%20Regional.ics" download>Subscribe Regional</a>
   </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const calEl = document.getElementById('calendar');
-
-      const css = getComputedStyle(document.documentElement);
-      const sourceDefs = {
-        local: {
-          id: 'local',
-          url: '/assets/Tango%20Local.ics',
-          format: 'ics',
-          className: 'local',
-          color: css.getPropertyValue('--local').trim()
-        },
-        regional: {
-          id: 'regional',
-          url: '/assets/Tango%20Regional.ics',
-          format: 'ics',
-          className: 'regional',
-          color: css.getPropertyValue('--regional').trim()
-        }
-      };
-
-      const calendar = new FullCalendar.Calendar(calEl, {
-        initialView: 'dayGridMonth',
-        height: 'auto',
-        contentHeight: 'auto',
-        headerToolbar: false,
-        eventTimeFormat: { hour: 'numeric', minute: '2-digit' },
-
-        // IMPORTANT: register the plugins we loaded above
-        plugins: [ FullCalendarDayGrid, FullCalendarList, FullCalendarICalendar ],
-
-        eventSources: [ sourceDefs.local, sourceDefs.regional ],
-
-        eventDidMount: (info) => {
-          if (info.event.extendedProps.description) {
-            info.el.title = info.event.extendedProps.description;
-          }
-        }
-      });
-
-      calendar.render();
-
-      // View toggle
-      document.querySelectorAll('.view').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.view').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          calendar.changeView(btn.dataset.view);
-        });
-      });
-
-      // Filters (remove/add event sources)
-      const ensureSource = (id) => { if (!calendar.getEventSourceById(id)) calendar.addEventSource(sourceDefs[id]); };
-      const removeSource = (id) => { const s = calendar.getEventSourceById(id); if (s) s.remove(); };
-      const setFilter = (which) => {
-        document.querySelectorAll('.filters .pill').forEach(p => p.classList.remove('active'));
-        document.querySelector(`.filters .pill[data-filter="${which}"]`).classList.add('active');
-        if (which === 'all') { ensureSource('local'); ensureSource('regional'); }
-        else if (which === 'local') { ensureSource('local'); removeSource('regional'); }
-        else { ensureSource('regional'); removeSource('local'); }
-      };
-      document.querySelectorAll('.filters .pill').forEach(p => {
-        p.addEventListener('click', () => setFilter(p.dataset.filter));
-      });
-
-      // Subscribe button: open both feeds (webcal:// when on https)
-      const toWebcal = (path) => (location.protocol === 'https:' ? 'webcal://' + location.host + path : path);
-      document.getElementById('subAll').addEventListener('click', () => {
-        window.open(toWebcal('/assets/Tango%20Local.ics'), '_blank');
-        setTimeout(() => window.open(toWebcal('/assets/Tango%20Regional.ics'), '_blank'), 350);
-      });
-    });
-  </script>
-</body>
-</html>
+</header>
+<div class="controls" id="viewControls" style="margin:8px">
+  <button class="btn active" data-view="month">Month</button>
+  <button class="btn" data-view="agenda">Agenda</button>
+  <span style="width:12px"></span>
+  <button class="btn active" data-filter="all">All</button>
+  <button class="btn" data-filter="local">Local</button>
+  <button class="btn" data-filter="regional">Regional</button>
+</div>
+<div class="legend">
+  <span class="dot local"></span> Local
+  <span class="dot regional"></span> Regional
+</div>
+<div id="monthView" style="display:block">
+  <div class="month" id="monthHeaders"></div>
+  <div class="month" id="monthGrid"></div>
+</div>
+<div id="agendaView" style="display:none">
+  <div class="list" id="agendaList"></div>
+</div>
+<footer>© 2025 durangotango.info — Data from Local + Regional ICS feeds</footer>
+<script>
+function parseICS(text, tag){
+  const lines=text.split(/\r?\n/);const evs=[];let cur=null;let inEvent=false;
+  function dt(line){const m=line.match(/:(\d{8})T(\d{6})/);if(!m)return null;
+    return new Date(+m[1].slice(0,4),+m[1].slice(4,6)-1,+m[1].slice(6,8),+m[2].slice(0,2),+m[2].slice(2,4));}
+  for(const l of lines){
+    if(l==='BEGIN:VEVENT'){inEvent=true;cur={};continue;}
+    if(l==='END:VEVENT'){if(cur&&cur.dtstart){cur.tag=tag;evs.push(cur);}inEvent=false;continue;}
+    if(!inEvent)continue;
+    if(l.startsWith('DTSTART'))cur.dtstart=dt(l);
+    if(l.startsWith('DTEND'))cur.dtend=dt(l);
+    if(l.startsWith('SUMMARY:'))cur.summary=l.slice(8);
+    if(l.startsWith('LOCATION:'))cur.location=l.slice(9);
+  }
+  return evs;
+}
+async function loadAll(){
+  const [a,b]=await Promise.all([fetch('./assets/Tango%20Local.ics').then(r=>r.text()),fetch('./assets/Tango%20Regional.ics').then(r=>r.text())]);
+  let evs=[...parseICS(a,'local'),...parseICS(b,'regional')];
+  evs.sort((x,y)=>x.dtstart-y.dtstart);window.events=evs;render();
+}
+let state={view:'month',filter:'all'};
+function sameDay(a,b){return a.getFullYear()==b.getFullYear()&&a.getMonth()==b.getMonth()&&a.getDate()==b.getDate();}
+function fmt(d){return d.toLocaleString([], {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});}
+function filtered(){return state.filter==='all'?window.events:window.events.filter(e=>e.tag===state.filter);}
+function renderMonth(){const h=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+document.getElementById('monthHeaders').innerHTML=h.map(x=>`<div class='day-header'>${x}</div>`).join('');
+const grid=document.getElementById('monthGrid');grid.innerHTML='';
+const base=new Date();base.setDate(1);
+const days=new Date(base.getFullYear(),base.getMonth()+1,0).getDate();
+const offset=new Date(base.getFullYear(),base.getMonth(),1).getDay();
+const cells=[];for(let i=0;i<offset;i++)cells.push(null);for(let d=1;d<=days;d++)cells.push(new Date(base.getFullYear(),base.getMonth(),d));
+while(cells.length%7)cells.push(null);
+for(const c of cells){const div=document.createElement('div');div.className='cell';
+if(!c){div.style.visibility='hidden';grid.appendChild(div);continue;}
+div.innerHTML=`<div class='dnum'>${c.getDate()}</div>`;
+for(const e of filtered().filter(e=>sameDay(e.dtstart,c))){div.innerHTML+=`<div class='ev'>${e.summary}</div>`;}
+grid.appendChild(div);}}
+function renderAgenda(){const list=document.getElementById('agendaList');list.innerHTML='';
+for(const e of filtered()){list.innerHTML+=`<div class='item'><div>${fmt(e.dtstart)} — ${e.summary}${e.location?' · '+e.location:''}</div></div>`;}}
+function render(){if(!window.events)return;if(state.view==='month'){renderMonth();document.getElementById('monthView').style.display='block';document.getElementById('agendaView').style.display='none';}else{renderAgenda();document.getElementById('monthView').style.display='none';document.getElementById('agendaView').style.display='block';}}
+document.getElementById('viewControls').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+if(b.dataset.view){state.view=b.dataset.view;document.querySelectorAll('[data-view]').forEach(x=>x.classList.remove('active'));b.classList.add('active');render();}
+if(b.dataset.filter){state.filter=b.dataset.filter;document.querySelectorAll('[data-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');render();}});
+loadAll();
+</script>
+</body></html>
