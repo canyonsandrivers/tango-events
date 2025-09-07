@@ -19,9 +19,11 @@
   <meta name="twitter:description" content="Find upcoming Argentine Tango events in and around Durango, Colorado — practicas, milongas, workshops, and festivals updated regularly.">
   <meta name="twitter:image" content="https://durangotango.info/assets/tango-preview.jpg">
 
-  <!-- FullCalendar (CDN) -->
+  <!-- FullCalendar (core + required view plugins + iCalendar) -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.11/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.11/index.global.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@6.1.11/index.global.min.js"></script>
 
   <style>
@@ -42,6 +44,7 @@
     .dot{ width:10px; height:10px; border-radius:999px; display:inline-block; margin-right:6px; }
     .dot.local{ background:var(--local); } .dot.regional{ background:var(--regional); }
     footer{ margin-top:14px; color:#cbd5e1; }
+
     /* Calendar theming */
     .fc{ background:#0f172a; border:1px solid var(--border); border-radius:14px; padding:10px; }
     .fc a{ color:#dbeafe } .fc .fc-button{ background:#111827; border-color:#243244; }
@@ -57,6 +60,7 @@
     </header>
 
     <div class="toolbar">
+      <!-- View toggles -->
       <button class="pill view active" data-view="dayGridMonth">Month</button>
       <button class="pill view" data-view="listMonth">Agenda</button>
 
@@ -66,6 +70,7 @@
       </div>
 
       <div style="width:100%"></div>
+      <!-- Filters -->
       <div class="filters">
         <button class="pill active" data-filter="all">All</button>
         <button class="pill" data-filter="local">Local</button>
@@ -84,33 +89,37 @@
     document.addEventListener('DOMContentLoaded', () => {
       const calEl = document.getElementById('calendar');
 
+      // Build source configs once so we can remove/re-add cleanly for filters
+      const css = getComputedStyle(document.documentElement);
+      const sourceDefs = {
+        local: {
+          id: 'local',
+          url: '/assets/Tango%20Local.ics',
+          format: 'ics',
+          className: 'local',
+          color: css.getPropertyValue('--local').trim()
+        },
+        regional: {
+          id: 'regional',
+          url: '/assets/Tango%20Regional.ics',
+          format: 'ics',
+          className: 'regional',
+          color: css.getPropertyValue('--regional').trim()
+        }
+      };
+
       const calendar = new FullCalendar.Calendar(calEl, {
         initialView: 'dayGridMonth',
         height: 'auto',
         contentHeight: 'auto',
         headerToolbar: false,
         eventTimeFormat: { hour: 'numeric', minute: '2-digit' },
-        plugins: [ FullCalendar.iCalendarPlugin ],
 
-        // Two ICS sources: tag via classNames + color
-        eventSources: [
-          {
-            id: 'local',
-            url: '/assets/Tango%20Local.ics',
-            format: 'ics',
-            className: 'local',
-            color: getComputedStyle(document.documentElement).getPropertyValue('--local').trim()
-          },
-          {
-            id: 'regional',
-            url: '/assets/Tango%20Regional.ics',
-            format: 'ics',
-            className: 'regional',
-            color: getComputedStyle(document.documentElement).getPropertyValue('--regional').trim()
-          }
-        ],
+        // IMPORTANT: register required plugins
+        plugins: [ FullCalendarDayGrid, FullCalendarList, FullCalendarICalendar ],
 
-        // Nice titles on cells
+        eventSources: [ sourceDefs.local, sourceDefs.regional ],
+
         eventDidMount: (info) => {
           if (info.event.extendedProps.description) {
             info.el.title = info.event.extendedProps.description;
@@ -129,35 +138,38 @@
         });
       });
 
-      // Filters (show/hide event sources)
+      // Filters (remove/add sources)
+      const ensureSource = (id) => {
+        if (!calendar.getEventSourceById(id)) {
+          calendar.addEventSource(sourceDefs[id]);
+        }
+      };
+      const removeSource = (id) => {
+        const s = calendar.getEventSourceById(id);
+        if (s) s.remove();
+      };
+
       const setFilter = (which) => {
         document.querySelectorAll('.filters .pill').forEach(p => p.classList.remove('active'));
         document.querySelector(`.filters .pill[data-filter="${which}"]`).classList.add('active');
 
-        const srcLocal = calendar.getEventSourceById('local');
-        const srcRegional = calendar.getEventSourceById('regional');
-
-        // Remove/add sources by filter
-        const ensure = (id) => calendar.getEventSourceById(id) || calendar.addEventSource(calendar.getOption('eventSources').find(s => s.id === id));
-
-        if (which === 'all') {
-          ensure('local'); ensure('regional');
-        } else if (which === 'local') {
-          ensure('local'); if (srcRegional) srcRegional.remove();
-        } else if (which === 'regional') {
-          ensure('regional'); if (srcLocal) srcLocal.remove();
-        }
+        if (which === 'all') { ensureSource('local'); ensureSource('regional'); }
+        else if (which === 'local') { ensureSource('local'); removeSource('regional'); }
+        else if (which === 'regional') { ensureSource('regional'); removeSource('local'); }
       };
+
       document.querySelectorAll('.filters .pill').forEach(p => {
         p.addEventListener('click', () => setFilter(p.dataset.filter));
       });
 
-      // Subscribe button (open both ICS as webcal)
-      const makeWebcal = (path) => (location.protocol === 'https:' ? 'webcal://' + location.host + path : path);
+      // Subscribe button (open both ICS with webcal when on https)
+      const makeWebcal = (path) => (location.protocol === 'https:'
+        ? 'webcal://' + location.host + path
+        : path);
+
       document.getElementById('subAll').addEventListener('click', () => {
-        // Open Local then Regional (many clients add both)
         window.open(makeWebcal('/assets/Tango%20Local.ics'), '_blank');
-        setTimeout(() => window.open(makeWebcal('/assets/Tango%20Regional.ics'), '_blank'), 400);
+        setTimeout(() => window.open(makeWebcal('/assets/Tango%20Regional.ics'), '_blank'), 350);
       });
     });
   </script>
