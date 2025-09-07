@@ -509,7 +509,10 @@
   }
 
   // ----- UI interactions -----
-  const activeView = () => document.querySelector('.view.pill.active')?.dataset.view || 'month';
+  function activeView(){
+    var el = document.querySelector('.view.pill.active');
+    return (el && el.dataset && el.dataset.view) ? el.dataset.view : 'month';
+  }
 
   document.querySelectorAll('.view.pill').forEach(b=>{
     b.addEventListener('click', ()=>{
@@ -517,7 +520,7 @@
       b.classList.add('active');
       const view = b.dataset.view;
 
-      // FIX: explicitly set display, don't rely on ''
+      // explicit display values
       const gridEl = document.getElementById('grid');
       const agendaEl = document.getElementById('agenda');
       gridEl.style.display   = (view === 'month')  ? 'grid'  : 'none';
