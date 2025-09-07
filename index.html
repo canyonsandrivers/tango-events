@@ -19,14 +19,14 @@
   <meta name="twitter:description" content="Find upcoming Argentine Tango events in and around Durango, Colorado — practicas, milongas, workshops, and festivals updated regularly.">
   <meta name="twitter:image" content="https://durangotango.info/assets/tango-preview.jpg">
 
-  <!-- FullCalendar core + required plugins (order matters) -->
+  <!-- FullCalendar core -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
 
-  <!-- ical.js parser (required by the iCalendar plugin) -->
+  <!-- REQUIRED for ICS: the ical.js parser must be loaded before the iCalendar plugin -->
   <script src="https://cdn.jsdelivr.net/npm/ical.js@1.4.0/build/ical.min.js"></script>
 
-  <!-- Views + iCalendar plugin -->
+  <!-- Views + iCalendar plugin (order after core) -->
   <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.11/index.global.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.11/index.global.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@6.1.11/index.global.min.js"></script>
@@ -89,7 +89,6 @@
     document.addEventListener('DOMContentLoaded', () => {
       const calEl = document.getElementById('calendar');
 
-      // Build source configs so we can re-add/remove for filters
       const css = getComputedStyle(document.documentElement);
       const sourceDefs = {
         local: {
@@ -115,7 +114,7 @@
         headerToolbar: false,
         eventTimeFormat: { hour: 'numeric', minute: '2-digit' },
 
-        // Register required plugins (names come from the global builds we loaded)
+        // IMPORTANT: register the plugins we loaded above
         plugins: [ FullCalendarDayGrid, FullCalendarList, FullCalendarICalendar ],
 
         eventSources: [ sourceDefs.local, sourceDefs.regional ],
@@ -138,7 +137,7 @@
         });
       });
 
-      // Filters: remove/add eventSources
+      // Filters (remove/add event sources)
       const ensureSource = (id) => { if (!calendar.getEventSourceById(id)) calendar.addEventSource(sourceDefs[id]); };
       const removeSource = (id) => { const s = calendar.getEventSourceById(id); if (s) s.remove(); };
       const setFilter = (which) => {
@@ -148,9 +147,11 @@
         else if (which === 'local') { ensureSource('local'); removeSource('regional'); }
         else { ensureSource('regional'); removeSource('local'); }
       };
-      document.querySelectorAll('.filters .pill').forEach(p => p.addEventListener('click', () => setFilter(p.dataset.filter)));
+      document.querySelectorAll('.filters .pill').forEach(p => {
+        p.addEventListener('click', () => setFilter(p.dataset.filter));
+      });
 
-      // Subscribe button (opens both feeds; uses webcal:// on https)
+      // Subscribe button: open both feeds (webcal:// when on https)
       const toWebcal = (path) => (location.protocol === 'https:' ? 'webcal://' + location.host + path : path);
       document.getElementById('subAll').addEventListener('click', () => {
         window.open(toWebcal('/assets/Tango%20Local.ics'), '_blank');
